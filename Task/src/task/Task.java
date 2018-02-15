@@ -5,32 +5,23 @@
  */
 package task;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  *
  * @author jenni
  */
 public final class Task {
-    
+    private Alarm alarm = new Alarm();
+    private List<String> agenda = new ArrayList();
+    private List<Boolean> states = new ArrayList();
     private String task;
-    private String [] agenda = {};
-    private boolean [] states = {};
     private TaskState state;
     
-    public Task(){
-        if (!isArrayEmpty(agenda)){
-            System.out.println("Array is not empty");
-        }
-    }
-    
-    public boolean isArrayEmpty(String [] _array){
-        _array = agenda;
-        for (int i = 0; i < _array.length; i++){
-            if (_array[i] != null) return false;
-        }
-            return true;
-    }
+    public Task(){ }
     
     public void setTask(String _task){
         task = _task; 
@@ -52,6 +43,22 @@ public final class Task {
         throw new IllegalStateException();
     }
     
+    public void setAgendaList(List _list){
+        agenda = _list;
+    }
+    
+    public List getAgendaList(){
+        return agenda;
+    }
+    
+    public void setStatesList(List _list){
+        states = _list;
+    }
+    
+    public List getStatesList(List _list){
+        return states;
+    }
+    
     public boolean isTaskDone(String [] _array, boolean [] _array2, String _key){
         boolean done = false;
         int index = 0;
@@ -62,57 +69,19 @@ public final class Task {
         return done;
     }
     
-    public void setAgendaArray(String [] _array){
-        agenda = _array;
-    }
-    
-    public String [] getAgendaArray(){ 
-        return agenda; 
-    }
-    
-    public void setStatesArray(boolean [] _array){
-        states = _array;
-    }
-    
-    public boolean [] getStatesArray(){ 
-        return states; 
-    }
-    
-    public void addTask(String [] _array, String _task){
-        int currentArraySize = _array.length;
-        int newArraySize = currentArraySize + 1;
-        String[] tempArray = new String[newArraySize];
-        for (int i = 0; i < currentArraySize; i ++){
-            tempArray[i] = _array[i];
-        }
-        tempArray[newArraySize -1] = _task;
-    }
-    
-    public void removeTask(String [] _array, int _index){
-        for (int i = _index; i < _array.length - 1; i++){
-            _array[i] = _array[i + 1];
-        }
-    }
-    
     public boolean isItemInArray(String [] _array, String _key){
         boolean check = false;
-        for (int i = 0; i < _array.length; i++){
-            check = _array[i].equals(_key);
+        for (String _array1 : _array) {
+            check = _array1.equals(_key);
         }
         return check;
     }
     
     public int returnItemIndex(String [] _array, boolean [] _array2, String _key){
-        String [] agendaArray = getAgendaArray();
         int index;
         for (index = 0; index < _array.length; index++){
             if (_array[index].equals(_key)) break;
         }
         return index;
-    }
-        
-    public void printAgenda(String [] _array){
-        System.out.println(Arrays.toString(_array));
-    }
-    
+    }    
 }

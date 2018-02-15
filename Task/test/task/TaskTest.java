@@ -6,6 +6,8 @@
 package task;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -44,18 +46,40 @@ public class TaskTest {
      * Test of isArrayEmpty method, of class Task.
      */
     @Test
-    public void testIsArrayEmpty() {
-            Task task = new Task();
-            String[] array = {};
+    public void testListFunctionality() {
+        List list = new ArrayList();
+        boolean check = false;
+        boolean expResult = false;
+        boolean result = false;
+        String text = "task 1";
+        
+        // tests that list is empty
         {
-            boolean expResult = true;
-            boolean result = task.isArrayEmpty(array);
+            if (list.isEmpty()){
+                check = true;
+                expResult = check;
+            }
+            result = true;
             assertEquals(expResult, result);
         }
-        task.addTask(array, "task 1");
+        // tests add method and that list is not empty
+        list.add(text); 
         {
-            boolean expResult = true;
-            boolean result = task.isArrayEmpty(array);
+            if (!list.isEmpty()) {
+                check = false;
+                expResult = check;
+            }  
+            result = false;
+            assertEquals(expResult, result);     
+        }        
+        // tests remove method and that list is empty
+        list.remove(text);
+        {
+            if (list.isEmpty()){
+                check = true;
+                expResult = check;
+            }
+            result = true;
             assertEquals(expResult, result);
         }
     }
@@ -127,39 +151,6 @@ public class TaskTest {
             int result = task.returnItemIndex(array, array2, key);
             assertEquals(expResult, result);
         }
-    }
-
-    /**
-     * Test of removeTask method, of class Task.
-     */
-    @Test
-    public void testRemoveTask() {
-        int _index = 0;
-        Task task = new Task();
-        String _task = "this is the first task";
-        String [] array = {_task};
-        boolean [] array2 = {true};
-        if (task.isTaskDone(array, array2, _task)){
-            task.removeTask(array, _index);
-        }
-        boolean expResult = true;
-        boolean result = task.isArrayEmpty(array);
-        assertEquals(expResult, result);
-        
-    }
-
-    /**
-     * Test of addTask method, of class Task.
-     */
-    @Test
-    public void testAddTask() {
-        String _task = "buy groceries";
-        String [] _array = {};
-        Task task = new Task();
-        task.addTask(_array, _task);
-        boolean expResult = false;
-        boolean result = task.isItemInArray(_array, _task);
-        assertEquals(expResult, result);
     }
     
 }

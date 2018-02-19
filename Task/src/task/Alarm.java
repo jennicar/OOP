@@ -25,11 +25,6 @@ public class Alarm{
     
     private Mixer mixer;
     private Clip clip;
-    /*private final long day = 24L * 60L * 60L * 1_000_000_000L;
-    private final long hour = 24L * 60L * 60L * 1_000_000_000L;
-    private final long minute = 24L * 60L * 60L * 1_000_000_000L;
-    private final long second = 24L * 60L * 60L * 1_000_000_000L;
-    private final long nanosecond = 24L * 60L * 60L * 1_000_000_000L;*/
     
     public Alarm(){};
     

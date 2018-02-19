@@ -6,8 +6,6 @@
 package task;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,13 +13,15 @@ import java.util.List;
  * @author jenni
  */
 public final class Task {
-    private Alarm alarm = new Alarm();
+    private Alarm alarm;
     private List<String> agenda = new ArrayList();
     private List<Boolean> states = new ArrayList();
     private String task;
     private TaskState state;
     
     public Task(){ }
+
+    public Task(Time time){ }
     
     public void setTask(String _task){
         task = _task; 

@@ -43,11 +43,11 @@ public class TimeTest {
     @Test
     public void testBuilder() {
         assertEquals(Time.build().time().toString(),new Time(0,0,0,0,0).toString());
-        assertEquals(Time.build().day(1).time(),new Time(1,0,0,0,0));
-        assertEquals(Time.build().hour(12).time(),new Time(12,0,0));
-        assertEquals(Time.build().minute(30).time(),new Time(0,30,0));
-        assertEquals(Time.build().second(15).time(),new Time(0,0,15));
-        assertEquals(Time.build().nanosecond(150_450_850).time(),new Time(0,0,0,0,150_450_850));
-        assertEquals(Time.build().day(1).hour(12).minute(30).second(15).nanosecond(150_450_850).time(),new Time(1,12,30,15,150_450_850));
+        assertEquals(Time.build().day(1).time().toString(),new Time(1,0,0,0,0).toString());
+        assertEquals(Time.build().hour(12).time().toString(),new Time(12,0,0).toString());
+        assertEquals(Time.build().minute(30).time().toString(),new Time(0,30,0).toString());
+        assertEquals(Time.build().second(15).time().toString(),new Time(0,0,15).toString());
+        assertEquals(Time.build().nanosecond(150_450_850).time().toString(),new Time(0,0,0,0,150_450_850).toString());
+        assertEquals(Time.build().day(1).hour(12).minute(30).second(15).nanosecond(150_450_850).time().toString(),new Time(1,12,30,15,150_450_850).toString());
     }    
 }

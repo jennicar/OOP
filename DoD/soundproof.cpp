@@ -1,33 +1,30 @@
-#include <string>
-#include <fstream>
-#include <iostream>
-#include <iomanip>
+#include "Soundproof.h"
 
 using namespace std;
 
 Soundproof::Soundproof() : noiseLevel(100) {}
 
 void Soundproof::setNoiseLevel(int _noiseLevel) { this->noiseLevel = _noiseLevel; }
-int Soundproof::getNoiseLevel(){ return this->noiseLevel; }
+int Soundproof::getNoiseLevel() { return this->noiseLevel; }
 
-bool Soundproof::isSoundproof(){
+bool Soundproof::isSoundproof() {
 	int noiseLevel = getNoiseLevel();
 	if (noiseLevel == 0) return true;
 	else return false;
 }
 
-void Soundproof::makeSoundproof(){
+void Soundproof::toggleSoundproof() {
 	int noiseLevel = getNoiseLevel();
-	while (noiseLevel != 0){ noiseLevel--; }
+	if (noiseLevel != 0) {
+		noiseLevel--;
+		if (noiseLevel == 0) setNoiseLevel(noiseLevel);
+	} else setNoiseLevel(25); 
+}
+
+void Soundproof::makeSoundproof() {
+	int noiseLevel = getNoiseLevel();
+	while (noiseLevel != 0) { noiseLevel--; }
 	if (noiseLevel == 0) setNoiseLevel(noiseLevel);
 }
 
-Soundproof::~Soundproof(){}
-
-int main(){
-	Soundproof soundproof;
-	soundproof.setNoiseLevel(100);
-	cout << soundproof.isSoundproof() << endl;
-	soundproof.makeSoundproof();
-	cout << soundproof.isSoundproof() << endl;
-}
+Soundproof::~Soundproof() {}

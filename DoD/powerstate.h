@@ -1,3 +1,3 @@
 #pragma once
 
-enum PowerState{ UNPOWERED, POWERED };
+enum PowerState { UNPOWERED, POWERED };

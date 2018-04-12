@@ -1,3 +1,3 @@
 #pragma once
 
-enum Mode{ PAUSE, PLAY };
+enum Mode { PAUSE, PLAY };

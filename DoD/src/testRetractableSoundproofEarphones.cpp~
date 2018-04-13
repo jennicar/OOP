@@ -1,0 +1,14 @@
+#include <gtest/gtest.h>
+#include <stdexcept>
+#include "RetractableSoundproofEarphones.h"
+
+using namespace std;
+
+TEST(DoD, makeSoundproof){
+  RetractableSoundproofEarphones e;
+  Retractable retractable;
+  Soundproof soundproof;
+  e.makeSoundproof();
+  ASSERT_EQ(retractable.isRetracted(), false);
+  ASSERT_EQ(soundproof.isSoundproof(), true);
+}

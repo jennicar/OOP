@@ -1,0 +1,44 @@
+#include <gtest/gtest.h>
+#include "Pizza.h"
+
+// add, size, remove fcns
+
+TEST(Pizza, constructor){
+  Pizza pizza;
+  ASSERT_EQ(pizza.getSize(), L);
+  ASSERT_EQ(pizza.getSauce(), TOMATO);
+  ASSERT_EQ(pizza.getNumOfToppings(), 2);
+}
+
+TEST(Pizza, setAndGets){
+  Pizza pizza;
+  pizza.setSize(M);
+  ASSERT_EQ(pizza.getSize(), M);
+  pizza.setSauce(ALFREDO);
+  ASSERT_EQ(pizza.getSauce(), ALFREDO);
+  pizza.setNumOfToppings(5);
+  ASSERT_EQ(pizza.getNumOfToppings(), 5);
+  }
+
+TEST(Pizza, add){
+  Pizza pizza;
+  Pizza spizza;
+  ASSERT_EQ(pizza.arraySize(), 0);
+  pizza.add(pizza);
+  ASSERT_EQ(pizza.arraySize(), 1);
+  pizza.add(spizza);
+  ASSERT_EQ(pizza.arraySize(), 2);
+}
+
+/*TEST(Pizza, remove){
+  Pizza pizza;
+  Pizza bbqPizza;
+  Pizza garlicPizza;
+  bbqPizza.setSauce(BBQ);
+  pizza.add(pizza);
+  pizza.add(bbqPizza);
+  pizza.add(garlicPizza);
+  ASSERT_EQ(pizza.arraySize(), 3);
+  pizza.remove(pizza);
+  ASSERT_EQ(pizza.arraySize(), 2);
+  }*/

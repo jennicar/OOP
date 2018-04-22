@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/testRetractableSoundproofEarphones.dir/src/testRetractableSoundproofEarphones.cpp.o CMakeFiles/testRetractableSoundproofEarphones.dir/src/testMain.cpp.o  -o ../bin/testRetractableSoundproofEarphones -lpthread ../lib/libgtest.a ../lib/libsources.a -lpthread 

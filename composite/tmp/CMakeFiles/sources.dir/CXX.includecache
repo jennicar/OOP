@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Pizza.h
+vector
+-
+Size.h
+../include/Size.h
+Sauce.h
+../include/Sauce.h
+
+../include/Sauce.h
+
+../include/Size.h
+
+/home/jr/projects/composite/src/pizza.cpp
+Pizza.h
+/home/jr/projects/composite/src/Pizza.h
+iostream
+-
+string
+-
+

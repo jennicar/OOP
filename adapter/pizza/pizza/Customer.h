@@ -1,14 +1,15 @@
 #pragma once
 #include "Pizza.h"
 
-class Customer {
+class Customer : Pizza{
 private:
-	Pizza pizza;
+	Pizza * pizza = new Pizza();
 public:
-	Customer(Pizza pizza) {
+	Customer() {};
+	Customer(Pizza *pizza) {
 		this->pizza = pizza;
 	}
 	void eat() {
-		pizza.eat();
+		pizza->eat();
 	}
 };

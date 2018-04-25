@@ -1,13 +1,12 @@
 #include "Customer.h"
+#include "Pizza.h"
 #include "PizzaAdapter.h"
 
 using namespace std;
 
 int main() {
-	Customer customer = new Customer(new PizzaAdapter());
-	customer.eat();
+	PizzaAdapter *pizzaAdapter = new PizzaAdapter();
+	Customer *customer = new Customer(pizzaAdapter);
+	customer->eat();
+	cin.get();
 }
-
-/*
-https://sourcemaking.com/design_patterns/adapter/cpp/1
-*/

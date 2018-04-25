@@ -2,14 +2,14 @@
 #include "Pizza.h"
 #include "PineapplePizza.h"
 
-class PizzaAdapter : Pizza {
+class PizzaAdapter : public Pizza {
 private:
-	PineapplePizza pizza;
+	PineapplePizza *pizza;
 public:
 	PizzaAdapter() {
 		pizza = new PineapplePizza();
 	}
-	void eat() {
-		pizza.eatBadPizza();
+	void eat() override {
+		pizza->eatBadPizza();
 	}
 };

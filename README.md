@@ -25,6 +25,6 @@ https://github.com/jennicar/OOP/tree/adapter
 
 Link to our presentation: { coming soon }
 
-< coming soon }
+{ coming soon }
 Final Project
 Search Engine (JavaScript) - Demonstrate object-orientation by including inheritance and extension to classes. Project should cover concepts from class and should exhibit some design patterns.

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "Pizza.h"
 
-// add, size, remove fcns
+// testing add, size, remove fcns
 
 TEST(Pizza, constructor){
   Pizza pizza(L, TOMATO, 2);

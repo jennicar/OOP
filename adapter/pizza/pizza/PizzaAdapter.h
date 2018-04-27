@@ -9,7 +9,7 @@ public:
 	PizzaAdapter() {
 		pizza = new PineapplePizza();
 	}
-	void eat() override {
-		pizza->eatBadPizza();
+	string eat() override {
+		return pizza->eatBadPizza();
 	}
 };

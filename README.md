@@ -1,3 +1,3 @@
 # OOP
 
-This repository is a collection of projects in my object-oriented programming class.
+Applying object-orientation to a planner object.

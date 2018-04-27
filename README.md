@@ -1,3 +1,3 @@
 # OOP
 
-Applying object-orientation to a planner object.
+C++ - Applying object-orientation to a planner object.

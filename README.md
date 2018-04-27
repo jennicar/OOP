@@ -23,7 +23,7 @@ https://github.com/jennicar/OOP/tree/composite
 Adapter Pattern (C++) - Translated my partner's code into c++ syntax
 https://github.com/jennicar/OOP/tree/adapter
 
-Link to our presentation: { coming soon }
+Link to our presentation: https://indd.adobe.com/view/2c5cf22e-1cb6-4a70-8375-ec1fb3886a00
 
 { coming soon }
 Final Project

@@ -1,0 +1,5 @@
+/home/jr/projects/composite/tmp/CMakeFiles/edit_cache.dir
+/home/jr/projects/composite/tmp/CMakeFiles/sources.dir
+/home/jr/projects/composite/tmp/CMakeFiles/testPizza.dir
+/home/jr/projects/composite/tmp/CMakeFiles/gtest.dir
+/home/jr/projects/composite/tmp/CMakeFiles/rebuild_cache.dir

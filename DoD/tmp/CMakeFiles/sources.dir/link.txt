@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../lib/libsources.a  CMakeFiles/sources.dir/src/soundproofEarphones.cpp.o CMakeFiles/sources.dir/src/soundproof.cpp.o CMakeFiles/sources.dir/src/earphones.cpp.o CMakeFiles/sources.dir/src/retractableSoundproofEarphones.cpp.o CMakeFiles/sources.dir/src/retractableEarphones.cpp.o CMakeFiles/sources.dir/src/retractable.cpp.o
-/usr/bin/ranlib ../lib/libsources.a

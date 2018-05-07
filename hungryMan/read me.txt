@@ -1,6 +1,0 @@
-https://github.com/jennicar/OOP/tree/hungryMan-cpp
-
-notes
-- Did not get c++ test to work on visual studio
-- I added a screenshot, I came fairly close to implementing it, but I just couldn't
-understand how/why the boolean method was suddenly a void method

@@ -1,9 +1,0 @@
-int volume;
-
-void setVolume(int _volume){
-  volume = _volume;
-}
-
-int getVolume(){
-  return volume;
-}

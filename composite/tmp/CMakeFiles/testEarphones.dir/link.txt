@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/testEarphones.dir/src/testEarphones.cpp.o CMakeFiles/testEarphones.dir/src/testMain.cpp.o  -o ../bin/testEarphones -lpthread ../lib/libgtest.a ../lib/libsources.a -lpthread 

@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/testSoundproof.dir/src/testSoundproof.cpp.o CMakeFiles/testSoundproof.dir/src/testMain.cpp.o  -o ../bin/testSoundproof -lpthread ../lib/libgtest.a ../lib/libsources.a -lpthread 

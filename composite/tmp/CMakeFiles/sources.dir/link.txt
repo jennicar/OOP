@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../lib/libsources.a  CMakeFiles/sources.dir/src/pizza.cpp.o
-/usr/bin/ranlib ../lib/libsources.a

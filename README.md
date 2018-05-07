@@ -8,11 +8,11 @@ https://github.com/jennicar/OOP/tree/HW-1
 HW 2 (Java) - Translate HW 1 into java
 https://github.com/jennicar/OOP/tree/HW-2
 
-HW 3 (Java) - Include inheritance of another class and extension to another class
+HW 3 (Java) - Include inheritance of another class and extensions
 https://github.com/jennicar/OOP/tree/HW-3
 
-HW 4 (C++) - Use OOP in c++
-https://github.com/jennicar/OOP/tree/hungryMan-cpp
+HW 4 (C++) - Implement OOP in C++
+https://github.com/jennicar/OOP/tree/HW-4
 
 HW 5 (C++) - Illustrate the multiple-inheritance problem known as the Diamond of Death
 https://github.com/jennicar/OOP/tree/DiamondOfDeath

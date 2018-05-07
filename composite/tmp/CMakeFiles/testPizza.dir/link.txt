@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/testPizza.dir/src/testPizza.cpp.o CMakeFiles/testPizza.dir/src/testMain.cpp.o  -o ../bin/testPizza -lpthread ../lib/libgtest.a ../lib/libsources.a -lpthread 

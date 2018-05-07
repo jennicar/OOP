@@ -1,5 +1,6 @@
 # OOP
 
+<<<<<<< HEAD
 This repository is a collection of projects in my object-oriented programming class.
 
 HW 1 (Python) - Implement OOP on an object
@@ -28,3 +29,6 @@ Link to our presentation: { coming soon }
 { coming soon }
 Final Project
 Search Engine (JavaScript) - Demonstrate object-orientation by including inheritance and extension to classes. Project should cover concepts from class and should exhibit some design patterns.
+=======
+Python // Applying object-orientation to a planner object.
+>>>>>>> 351ebf9ad199e0eedd327d96f0a668b89be12c20

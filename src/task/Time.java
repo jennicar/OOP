@@ -77,7 +77,7 @@ public class Time {
 
     public int getNanosecond() {
         return (int) ((_nanoseconds % SECOND_NS) / NANOSECOND_NS);
-    }      
+    }
         
     @Override
     public String toString(){

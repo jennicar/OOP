@@ -49,5 +49,5 @@ public class TimeTest {
         assertEquals(Time.build().second(15).time().toString(),new Time(0,0,15).toString());
         assertEquals(Time.build().nanosecond(150_450_850).time().toString(),new Time(0,0,0,0,150_450_850).toString());
         assertEquals(Time.build().day(1).hour(12).minute(30).second(15).nanosecond(150_450_850).time().toString(),new Time(1,12,30,15,150_450_850).toString());
-    }    
+    }
 }

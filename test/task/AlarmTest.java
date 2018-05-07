@@ -5,6 +5,8 @@
  */
 package task;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -56,5 +58,13 @@ public class AlarmTest {
             fail("Invalid file - this should throw an exception");
         } catch (Exception e){ 
         }
+    }
+        
+    @Test
+    public void testSetTime(){
+        LocalDateTime nowClock = LocalDateTime.of(2018, Month.FEBRUARY, 21, 10, 0, 0);
+        LocalDateTime laterClock = LocalDateTime.of(2018, Month.FEBRUARY, 21, 10, 0, 3);
+        LocalDateTime testClock = LocalDateTime.now();
+        if (testClock < nowClock || testClock > laterClock) fail("testClock is out of range");
     }
 }

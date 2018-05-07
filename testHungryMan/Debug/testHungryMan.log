@@ -1,0 +1,3 @@
+﻿  unittest1.cpp
+c:\users\jenni\projects\oop\hungryman\testhungryman\unittest1.cpp(16): error C2664: 'void Microsoft::VisualStudio::CppUnitTestFramework::Assert::IsTrue(bool,const wchar_t *,const Microsoft::VisualStudio::CppUnitTestFramework::__LineInfo *)': cannot convert argument 1 from 'void' to 'bool'
+  c:\users\jenni\projects\oop\hungryman\testhungryman\unittest1.cpp(16): note: Expressions of type void cannot be converted to other types

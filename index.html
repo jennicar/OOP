@@ -1,0 +1,39 @@
+<html>
+<head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<link rel="stylesheet" type="text/css" href="styling.css">
+</head>
+
+<body>
+	<form><input id="search_input" placeholder="Search by keyword or name" type="search" /> <input id="search_btn" value="Search" type="button" />
+	<div><select id="dept_val">
+	<option disabled="disabled">Department</option>
+	<option>Art and Design</option>
+	<option>Biological Sciences</option>
+	<option selected="selected">Business</option>
+	<option>Computer Science, Mathematics, and Statistics</option>
+	<option>Engineering</option>
+	<option>Health Sciences</option>
+	<option>Kinesiology</option>
+	<option>Languages, Literature, and Mass Communication</option>
+	<option>Music</option>
+	<option>Physical and Environmental Sciences</option>
+	<option>Social and Behavioral Sciences</option>
+	<option>Teacher Education</option>
+	<option>Theatre Arts</option>
+	<option>WCCC</option>
+	</select>
+	<select id="format_val">
+	<option disabled="disabled">Format</option>
+	<option selected="selected">Traditional</option>
+	<option>Online</option>
+	</select>
+	</div>
+	</form>
+	<div id="degrees_grid"></div>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="search.js"></script>
+</body>
+</html>

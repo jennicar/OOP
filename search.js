@@ -1,7 +1,31 @@
-window.onload = load_degrees;  
+window.onload = function(){
+	load_degrees();
+	var search = document.getElementById('search_btn');
+	search.onclick = function(){
+		var keyword_val = $('#search_input').val().replace(/ /g, '').replace(/[^\w\s]|_/g, '');
+		var dept_val = $('#dept_val option:selected').text().replace(/ /g, '').toLowerCase();
+		var format_val = $('#format_val option:selected').text().toLowerCase();
+		
+		var filter = new Filter(dept_val, format_val);
+		filter.set_keyword_val(keyword_val);
+		filter.filter_values();
+	}
+	
+	var view_details = document.getElementById('view_options');
+	view_details.onclick = function(){
+		var popup = new Description("", "", "", []);
+		popup.display_degrees(degrees);
+	}
+}
 
 var degrees = [];
 
+	function inherit_prototype(child, parent){
+		var copy_parent = Object.create(parent.prototype);
+		copy_parent.constructor = child;
+		child.prototype = copy_parent;
+	}
+	
     function Degree(n, d, f, p){
 		this.name = n;
     	this.dept = d;
@@ -11,10 +35,36 @@ var degrees = [];
     
     Degree.prototype = {
     	constructor: Degree,
+		display_degrees:function(_degrees){
+			var div = document.getElementById('degrees_grid');
+			var html = "";
+			var img_path = 'imgs/placeholder.png';
+			
+			for (var i = 0; i < _degrees.length; i++){
+				html += "<div id='" + degrees[i].name.replace(/ /g, '').toLowerCase() + "' class='wrapper'>";
+				html += "<div class='frame'><img src='" + img_path + "'/></div>";
+				html += "<div class='icons'><img src='" + img_path + "'/><img src='" + img_path + "'/><img src='" + img_path + "'/></div><div>";
+				html += "<ul><li>" + _degrees[i].name + "</li>"
+				html+= "<li>Program levels offered: <br>";
+				html += _degrees[i].programLvl.join(', ') + "</li>";
+				html += "</ul></div><button id='view_options'>View Program Options</button></div>";
+			}
+			
+			div.innerHTML = html;
+		}, 
 		testing:function(){
 			alert(this.name + this.dept + this.format + this.programLvl);
 		}
     }
+	
+	function Description(n, d, f, p){
+		Degree.call(this, n, d, f, p);
+	}
+	inherit_prototype(Description, Degree);
+	
+	Description.prototype.display_degrees = function(_degrees){
+		alert("This degree is so cool, wow, you'll learn a lot :)");
+	}
 	
 	function Filter(d, f){
 		this.keyword_val = "";
@@ -48,34 +98,12 @@ var degrees = [];
 					else break;
 				}
 			}
-			var str = JSON.stringify(matches, null, 4);
-			// alert(str);
-			display_degrees(matches);
+			
+			var _degrees = new Degree("", "", "", []);
+			_degrees.display_degrees(matches);
 		}, 
 		testing:function(){
 			alert(this.keyword_val + this.dept_val + this.format_val); }
-	}
-	
-	function inherit_prototype(child, parent){
-		var copy_parent = Object.create(parent.prototype);
-		copy_parent.constructor = child;
-		child.prototype = copy_parent;
-	}
-	
-	function Filtering(d, f){
-		Filter.call(this, d, f);
-	}
-	inherit_prototype(Filtering, Filter);
-	
-	var search = document.getElementById('search_btn');
-	search.onclick = function(){
-		var keyword_val = $('#search_input').val().replace(/ /g, '').replace(/[^\w\s]|_/g, '');
-		var dept_val = $('#dept_val option:selected').text().replace(/ /g, '').toLowerCase();
-		var format_val = $('#format_val option:selected').text().toLowerCase();
-		
-		var filter = new Filter(dept_val, format_val);
-		filter.set_keyword_val(keyword_val);
-		filter.filter_values();
 	}
 	
 	function load_degrees(){
@@ -91,25 +119,6 @@ var degrees = [];
 		
 		degrees.push(accounting); degrees.push(biology); degrees.push(computer_science); degrees.push(dance); degrees.push(economics); degrees.push(film); degrees.push(graphic_design); degrees.push(history); degrees.push(information_systems);
 		
-		display_degrees(degrees);
-		var str = JSON.stringify(degrees, null, 4);
-		// alert(str);
-	}
-	
-	function display_degrees(_degrees){
-		var div = document.getElementById('degrees_grid');
-		var html = "";
-		var img_path = "https://www.happyceliac.com/wp-content/uploads/2018/02/placeholder-image.png";
-		
-		for (var i = 0; i < _degrees.length; i++){
-			html += "<div id='" + degrees[i].name.replace(/ /g, '').toLowerCase() + "' class='wrapper'>";
-			html += "<div class='frame'><img src='" + img_path + "'/></div>";
-			html += "<div class='icons'><img src='" + img_path + "'/><img src='" + img_path + "'/><img src='" + img_path + "'/></div><div>";
-			html += "<ul><li>" + _degrees[i].name + "</li>"
-			html+= "<li>Program levels offered: <br>";
-			html += _degrees[i].programLvl.join(', ') + "</li>";
-			html += "</ul></div><button id='view_options' onclick='display_modal()'>View Program Options</button></div>";
-		}
-		
-		div.innerHTML = html;
+		var _degrees = new Degree("", "", "", []);
+		_degrees.display_degrees(degrees);
 	}

@@ -1,56 +1,64 @@
-<html>
-<head>
-	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-	<meta content="utf-8" http-equiv="encoding">
-	<link rel="stylesheet" type="text/css" href="styling.css">
-	<link rel="stylesheet" type="text/css" href="display_style.css">
-</head>
+window.onload = function(){
+	load_degrees();
+}
 
-<body>
-	<form>
-	<div><select multiple id="program_val">
-	<option disabled="disabled">Program Level</option>
-	<option>Minor</option>
-	<option>Associate</option>
-	<option>Bachelor</option>
-	<option>Master's</option>
-	<option>Doctoral</option>
-	<option>Certificate</option>
-	</select>
-	<select multiple id="location_val">
-	<option disabled="disabled">Location</option>
-	<option>Main Campus</option>
-	<option>Bishop Campus</option>
-	<option>Montrose Campus</option>
-	</select>
-	<input id="format_btn" type="button" value="Online only">
-	</div>
-	<div><select id="dept_val">
-	<option selected="selected">Department</option>
-	<option>Art and Design</option>
-	<option>Biological Sciences</option>
-	<option>Business</option>
-	<option>Computer Science, Mathematics, and Statistics</option>
-	<option>Engineering</option>
-	<option>Health Sciences</option>
-	<option>Kinesiology</option>
-	<option>Languages, Literature, and Mass Communication</option>
-	<option>Music</option>
-	<option>Physical and Environmental Sciences</option>
-	<option>Social and Behavioral Sciences</option>
-	<option>Teacher Education</option>
-	<option>Theatre Arts</option>
-	<option>WCCC</option>
-	</select></div>
-	<input id="search_btn" value="Search" type="button" />
-	</form>
+// degree information
+	function Degree(n, d, f, p, l){
+		this.name = n;
+		this.dept = d;
+		this.format = f;
+		this.program = p;
+		this.location = l;
+	}
+    
+    Degree.prototype = {
+    	constructor: Degree,
+		display_degrees:function(_degrees){
+			var div = document.getElementById('degrees_grid');
+			var html = "";
+			var img_path = 'img/placeholder.png';
+			
+			_degrees.sort(compare);
+			
+			for (var i = 0; i < _degrees.length; i++){
+				html += "<div id='" + degrees[i].name.replace(/ /g, '').toLowerCase() + "' class='wrapper'>";
+				html += "<div class='frame'><img src='" + img_path + "'/></div>";
+				html += "<div class='icons'><img src='" + img_path + "'/><img src='" + img_path + "'/><img src='" + img_path + "'/></div><div>";
+				html += "<ul><li>" + _degrees[i].name + "</li>"
+				html += "<li>Program levels offered: <br>";
+				html += _degrees[i].program.join(', ') + "</li>";
+				html += "</ul></div><button id='view_options'>View Program Options</button></div>";
+			}
+			div.innerHTML = html;
+		}, 
+		testing:function(){
+			alert(this.name + this.dept + this.format + this.program);
+		}
+    }
 	
-	<div id="filter_div"></div>
-	<div id="testing_div"></div>
-	<div id="degrees_grid"></div>
+// loading and displaying degrees
+	function load_degrees(){
+		var accounting = new Degree("Accounting", "Business", "Online", ["Bachelor", "Minor"], ["Montrose Campus"]);
+		var biology = new Degree("Biology", "Biological Sciences", "Traditional", ["Bachelor", "Associate", "Minor"], ["Main Campus"]);
+		var computer_science = new Degree("Computer Science", "Computer Science, Mathematics, and Statistics", "Traditional", ["Bachelor", "Associate", "Minor", "Certificate"], ["Bishop Campus"]);
+		var dance = new Degree("Dance", "Theatre Arts", "Online", ["Bachelor", "Minor"], ["Main Campus"]);
+		var economics = new Degree("Economics", "Business", "Traditional", ["Bachelor", "Minor"], ["Montrose Campus"]);
+		var film = new Degree("Film", "Art and Design", "Traditional", ["Bachelor"], "Montrose Campus");
+		var graphic_design = new Degree("Graphic Design", "Art and Design", "Traditional", ["Bachelor", "Minor"], ["Main Campus"]);
+		var history = new Degree("History", "Social and Behavioral Sciences", "Online", ["Bachelor", "Minor"], ["Montrose Campus"]);
+		var information_systems = new Degree("Information Systems", "Business", "Traditional", ["Bachelor"], ["Main Campus"]);
+		var addiction_studies = new Degree("Addiction Studies", "Social and Behavioral Sciences", "Traditional", ["Minor"], ["Main Campus"]);
+		var agriculture_science = new Degree("Agriculture Science", "WCCC", "Traditional", ["Associate"], ["Bishop Campus"]);
+		
+		degrees.push(accounting); degrees.push(biology); degrees.push(computer_science); degrees.push(dance); degrees.push(economics); degrees.push(film); degrees.push(graphic_design); degrees.push(history); degrees.push(information_systems); degrees.push(addiction_studies); degrees.push(agriculture_science);
+		
+		var _degrees = new Degree("", "", "", [], []);
+		_degrees.display_degrees(degrees);
+	}
 
-<!--<div class="row program-search-list">
-	<div id="Accounting" class="col-sm-4">
+/*
+<div class="row program-search-list">
+	<div class="col-sm-4">
 		<div class="program-list-item">
 			<div class="program-list-heading">
 				<h2>Accounting</h2>
@@ -66,10 +74,16 @@
 				<hr />
 				<p class="program-details-department">Business</p>
 				<p class="program-details-campus">Main Campus</p>
+				<!--THESE TWO ELEMENTS WILL BE USED FOR SEARCH AND/OR ICONS, BUT ARE NOT IN USE >>
+            Program Level:Bachelor&apos;sMaster&apos;sMinor
+            Format:Traditional
+            Keywords:accounting, accounting, public accounting, general accounting, master of business administration, 3+2, 3+2 program
+            -->
 				<a class="button-link" data-toggle="modal" data-target="#modal11">View Program Options</a>
 			</div>
 		</div>
 	</div>
+	<!-- This one brings in all of the awards for each program -->
 	<div id="modal11" class="modal fade program-search-modal" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -91,7 +105,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="AddictionStudies" class="col-sm-4">
+	<div class="col-sm-4">
 		<div class="program-list-item">
 			<div class="program-list-heading">
 				<h2>Addiction Studies</h2>
@@ -107,10 +121,16 @@
 				<hr />
 				<p class="program-details-department">Social and Behavioral Sciences</p>
 				<p class="program-details-campus">Main Campus</p>
+				<!--THESE TWO ELEMENTS WILL BE USED FOR SEARCH AND/OR ICONS, BUT ARE NOT IN USE >>
+            Program Level:Minor
+            Format:Traditional
+            Keywords:addiction studies, addiction counselor, human services
+            -->
 				<a class="button-link" data-toggle="modal" data-target="#modal12">View Program Options</a>
 			</div>
 		</div>
 	</div>
+	<!-- This one brings in all of the awards for each program -->
 	<div id="modal12" class="modal fade program-search-modal" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -128,7 +148,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="AgriculturalScience" class="col-sm-4">
+	<div class="col-sm-4">
 		<div class="program-list-item">
 			<div class="program-list-heading">
 				<h2>Agriculture Science</h2>
@@ -144,10 +164,16 @@
 				<hr />
 				<p class="program-details-department">Western Colorado Community College</p>
 				<p class="program-details-campus">Bishop Campus</p>
+				<!--THESE TWO ELEMENTS WILL BE USED FOR SEARCH AND/OR ICONS, BUT ARE NOT IN USE >>
+            Program Level:Associate
+            Format:Traditional
+            Keywords:agriculture science, ag science, ag, sustainable agriculture, horticultural, livestock
+            -->
 				<a class="button-link" data-toggle="modal" data-target="#modal13">View Program Options</a>
 			</div>
 		</div>
 	</div>
+	<!-- This one brings in all of the awards for each program -->
 	<div id="modal13" class="modal fade program-search-modal" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -165,9 +191,5 @@
 			</div>
 		</div>
 	</div>
-</div>-->
-	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="search.js"></script>
-</body>
-</html>
+</div>
+*/

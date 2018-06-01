@@ -18,11 +18,6 @@ window.onload = function(){
 		filter.filter_values();
 	}
 	
-	var view_details = document.getElementById('view_options');
-	view_details.onclick = function(){
-		var popup = new Description("", "", "", []);
-		popup.display_degrees(degrees);
-	}
 	var online_btn = document.getElementById('format_btn');
 	online_btn.onclick = function(){
 		if (online_check == false) online_check = true;
@@ -81,7 +76,7 @@ window.onload = function(){
 			var tempArray = []; var tempArray2 = [];
 			var tempProgram = this.program_val.toString();
 			var tempLocation = this.location_val.toString();
-			var matches = [];
+			var matches = []; var nonmatches = [];
 			for (var i = 0; i < degrees.length; i++){
 				check = false; check_program = false; check_location = false;
 				// department empty, program level empty, location empty, format traditional
@@ -198,8 +193,13 @@ window.onload = function(){
 				}
 				
 				if (check == true) matches.push(degrees[i]);
+				else if (check == false) nonmatches.push(degrees[i].name.replace(/ /g, ''));
 			}
+			
+			alert(matches);
+			
 			var _degrees = new Degree("", "", "", [], []);
+			_degrees.hide_degrees(nonmatches);
 			_degrees.display_degrees(matches);
 		}, 
 		testing:function(){

@@ -1,3 +1,11 @@
+/*
+DISPLAY/DATA FUNCTIONS
+
+Coded by Jennica Ramones
+Affiliated with Colorado Mesa University
+Last updated: June 2018
+*/
+
 // degree information
 	function Degree(n, d, f, p, l){
 		this.name = n;
@@ -12,16 +20,13 @@
     	constructor: Degree,
 		display_degrees:function(_degrees){
 			for (var i = 0; i < _degrees.length; i++){
-				$("#" + _degrees[i].name.replace(/ /g, '')).show();
+				$("#" + _degrees[i].name.replace(/ /g, '')).fadeIn();
 			}
 		}, 
 		hide_degrees:function(_degrees){
 			for (var i = 0; i < _degrees.length; i++){
-				$("#" + _degrees[i].replace(/ /g, '')).hide();
+				$("#" + _degrees[i].replace(/ /g, '')).fadeOut();
 			}
-		}, 
-		testing:function(){
-			alert(this.name + this.dept + this.format + this.program);
 		}
     }
 	

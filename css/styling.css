@@ -1,34 +1,4 @@
-/* content styling */
-.wrapper{
-    width: 300px;
-	height: 300px;
-	display: inline-block;
-	margin: 10px;
-	background-color: pink;
-}
-
-.frame{
-    width:300px;
-    height:100px;
-    overflow: hidden;
-}
-
-.frame img{
-    width: 300px;
-}
-
-.icons{
-    text-align: center;
-}
-
-.icons img{
-    width: 50px;
-}
-
-#view_options{
-    width: 300px;
-    height: 30px;
-}
+/* note: should be in css folder */
 
 /* filter display styling */
 #filter_div{
@@ -50,15 +20,10 @@
 }
 
 #filter_keywords{
-	width: 200px;
 	height: 25px;
 }
 
 #filter_program, #filter_location{
 	height: 18px;
 	display: inline-block;
-}
-
-#filter_minor{
-	background-color:teal;
 }

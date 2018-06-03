@@ -4,6 +4,8 @@ SEARCH FILTER FUNCTIONS
 Coded by Jennica Ramones
 Affiliated with Colorado Mesa University
 Last updated: June 2018
+
+note: should be in js folder
 */
 
 var degrees = [];

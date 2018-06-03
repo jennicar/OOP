@@ -4,6 +4,8 @@ DISPLAY/DATA FUNCTIONS
 Coded by Jennica Ramones
 Affiliated with Colorado Mesa University
 Last updated: June 2018
+
+note: should be in js folder
 */
 
 // degree information
@@ -32,6 +34,7 @@ Last updated: June 2018
 	
 	// loading and displaying degrees
 	function load_degrees(){
+		// when adding degrees, make sure the degree name here matches the div id on the html page, avoid using symbols, did not account for it
 		var accounting = new Degree("Accounting", "Business", "Online", ["Bachelor", "Master's"], ["Main Campus"]);
 		accounting.keywords = "accounting public accounting general accounting master of business administration 3+2, 3+2 program";
 		var addiction_studies = new Degree("Addiction Studies", "Social and Behavioral Sciences", "Traditional", ["Minor"], ["Main Campus"]);

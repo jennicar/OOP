@@ -5,6 +5,7 @@
 		this.format = f;
 		this.program = p;
 		this.location = l;
+		this.keywords = '';
 	}
     
     Degree.prototype = {
@@ -27,22 +28,13 @@
 	// loading and displaying degrees
 	function load_degrees(){
 		var accounting = new Degree("Accounting", "Business", "Online", ["Bachelor", "Master's"], ["Main Campus"]);
-		/*var biology = new Degree("Biology", "Biological Sciences", "Traditional", ["Bachelor", "Associate", "Minor"], ["Main Campus"]);
-		var computer_science = new Degree("Computer Science", "Computer Science, Mathematics, and Statistics", "Traditional", ["Bachelor", "Associate", "Minor", "Certificate"], ["Bishop Campus"]);
-		var dance = new Degree("Dance", "Theatre Arts", "Online", ["Bachelor", "Minor"], ["Main Campus"]);
-		var economics = new Degree("Economics", "Business", "Traditional", ["Bachelor", "Minor"], ["Montrose Campus"]);
-		var film = new Degree("Film", "Art and Design", "Traditional", ["Bachelor"], "Montrose Campus");
-		var graphic_design = new Degree("Graphic Design", "Art and Design", "Traditional", ["Bachelor", "Minor"], ["Main Campus"]);
-		var history = new Degree("History", "Social and Behavioral Sciences", "Online", ["Bachelor", "Minor"], ["Montrose Campus"]);
-		var information_systems = new Degree("Information Systems", "Business", "Traditional", ["Bachelor"], ["Main Campus"]);
-		*/
+		accounting.keywords = "accounting public accounting general accounting master of business administration 3+2, 3+2 program";
 		var addiction_studies = new Degree("Addiction Studies", "Social and Behavioral Sciences", "Traditional", ["Minor"], ["Main Campus"]);
+		addiction_studies.keywords = "addiction studies addiction counselor human services"
 		var agriculture_science = new Degree("Agriculture Science", "WCCC", "Online", ["Associate", "Master's"], ["Bishop Campus"]);
+		agriculture_science.keywords = "agriculture science ag science ag sustainable agriculture horticultural livestock";
 		
-		degrees.push(accounting);
-		/*degrees.push(biology); degrees.push(computer_science); degrees.push(dance); degrees.push(economics); degrees.push(film); degrees.push(graphic_design); degrees.push(history); degrees.push(information_systems); 
-		*/
-		degrees.push(addiction_studies); degrees.push(agriculture_science);
+		degrees.push(accounting); degrees.push(addiction_studies); degrees.push(agriculture_science);
 		
 		var _degrees = new Degree("", "", "", [], []);
 		degrees.sort(compare);

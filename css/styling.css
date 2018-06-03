@@ -45,8 +45,13 @@
 	display: inline-block;
 }
 
-#filter_dept, #filter_format, #filter_program, #filter_location{
+#filter_dept, #filter_format, #filter_program, #filter_location, #filter_keywords{
 	display: none;
+}
+
+#filter_keywords{
+	width: 200px;
+	height: 25px;
 }
 
 #filter_program, #filter_location{

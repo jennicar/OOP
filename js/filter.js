@@ -1,3 +1,10 @@
+/*
+SEARCH FILTER FUNCTIONS
+
+Coded by Jennica Ramones
+Affiliated with Colorado Mesa University
+*/
+
 var degrees = [];
 var online_check = false;
 
@@ -8,12 +15,17 @@ window.onload = function(){
         var dept_val = $('#dept_val option:selected').text();
         var program_val = $('#program_val').val();
         var location_val = $('#location_val').val();
-         
+        var keywords_val = $('#keywords_val').val().trim();
+						 
         if (online_check == false) var filter = new Filter('Traditional');
         else if (online_check == true) var filter = new Filter('Online');
         if (dept_val !== 'Department') filter.dept_val = dept_val;       
         if (program_val !== null) filter.program_val = program_val;
         if (location_val !== null) filter.location_val = location_val;
+		if (keywords_val !== ''){
+			filter.keyword_display = keywords_val;
+			filter.keywords_val = keywords_val.replace(/ /g, '');
+		}
                  		 
         filter.filter_values();
         filter.display_filters();
@@ -24,15 +36,33 @@ window.onload = function(){
 		if (online_check == false) online_check = true;
 		else online_check = false;
 	}
+	
+	// not my code, found here --> http://jsfiddle.net/xQqbR/1022/
+	// modified code for program
+	// prevents the need to hold down the CTRL button when selecting options
+	$('#program_val > option, location_val > option').mousedown(function(e) {
+    e.preventDefault();
+    var originalScrollTop = $(this).parent().scrollTop();
+    console.log(originalScrollTop);
+    $(this).prop('selected', $(this).prop('selected') ? false : true);
+    var self = this;
+    $(this).parent().focus();
+    setTimeout(function() {
+        $(self).parent().scrollTop(originalScrollTop);
+    }, 0);
+    
+    return false;
+	});
 }
 	
 	// filter functions
 	function Filter(f){
-		this.keyword_val = '';
 		this.dept_val = '';
 		this.format_val = f;
 		this.program_val = [];
 		this.location_val = [];
+		this.keywords_val = '';
+		this.keyword_display = '';
 	}
 	
 	Filter.prototype = {
@@ -44,7 +74,15 @@ window.onload = function(){
 			filter.dept_val = this.dept_val;
 			filter.program_val = this.program_val;
 			filter.location_val = this.location_val;
+			filter.keywords_val = this.keywords_val;
 			div.style.visibility = 'visible';
+			
+			// keyword filter
+			if (this.keywords_val !== ''){
+				var filter_keywords = document.getElementById('filter_keywords');
+				filter_keywords.innerHTML = "Search results for " + this.keyword_display;
+				filter_keywords.style.display = "block";
+			}
 			
 			// department filter
 			if (this.dept_val !== ''){
@@ -112,20 +150,19 @@ window.onload = function(){
 				filter_location.innerHTML = html;
 				for (var j = 0; j < tempArray.length; j++){
 					$('#filter_' + tempArray[j].replace(/ /g, '')).click(function(){
-						var temp = this.id.slice(7);
+						var temp = this.id.slice(7).replace(/([A-Z])/g, ' $1').trim();
 						var index = tempArray.indexOf(temp);
 						var location_val = tempArray;
 						location_val.splice(index, 1);
 						filter.location_val = location_val;
 						filter.filter_values();
-						
 						document.getElementById(this.id).style.display = 'none';
 					});
 				}
 			}
 		}, 
 		filter_values:function(){
-			var check = false; var check_program = false; var check_location = false;
+			var check = false; var check_program = false; var check_location = false; var check_keyword = true;
 			var tempArray = []; var tempArray2 = [];
 			var tempProgram = this.program_val.toString();
 			var tempLocation = this.location_val.toString();
@@ -245,7 +282,14 @@ window.onload = function(){
 					if (check_program === true && check_location === true) check = true;
 				}
 				
-				if (check == true) matches.push(degrees[i]);
+				// keyword filter
+				if (this.keywords_val !== ''){
+					var regex = new RegExp(this.keywords_val, "gi");
+					if (degrees[i].keywords.match(regex)) check_keyword = true;
+					else check_keyword = false;
+				}
+				
+				if ((check === true) && (check_keyword === true)) matches.push(degrees[i]);
 				else nonmatches.push(degrees[i].name.replace(/ /g, ''));
 			}
 			

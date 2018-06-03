@@ -37,7 +37,6 @@
 }
 
 .filter{
-	width: 110px;
 	height: 18px;
 	background-color: pink;
 	padding: 3px;
@@ -46,6 +45,15 @@
 	display: inline-block;
 }
 
-#accounting, #agriculturescience, #addictionstudies{
-	background-color: pink;
+#filter_dept, #filter_format, #filter_program, #filter_location{
+	display: none;
+}
+
+#filter_program, #filter_location{
+	height: 18px;
+	display: inline-block;
+}
+
+#filter_minor{
+	background-color:teal;
 }

@@ -5,17 +5,18 @@ window.onload = function(){
 	load_degrees();
 	var search = document.getElementById('search_btn');
 	search.onclick = function(){
-		var dept_val = $('#dept_val option:selected').text();
-		var program_val = $('#program_val').val();
-		var location_val = $('#location_val').val();
-		
-		if (online_check == false) var filter = new Filter('Traditional');
-		else if (online_check == true) var filter = new Filter('Online');
-		if (dept_val !== 'Department') filter.set_dept_val(dept_val);		
-		if (program_val !== null) filter.set_program_val(program_val);
-		if (location_val !== null) filter.set_location_val(location_val);
-		
-		filter.filter_values();
+        var dept_val = $('#dept_val option:selected').text();
+        var program_val = $('#program_val').val();
+        var location_val = $('#location_val').val();
+         
+        if (online_check == false) var filter = new Filter('Traditional');
+        else if (online_check == true) var filter = new Filter('Online');
+        if (dept_val !== 'Department') filter.dept_val = dept_val;       
+        if (program_val !== null) filter.program_val = program_val;
+        if (location_val !== null) filter.location_val = location_val;
+                 		 
+        filter.filter_values();
+        filter.display_filters();
 	}
 	
 	var online_btn = document.getElementById('format_btn');
@@ -36,41 +37,93 @@ window.onload = function(){
 	
 	Filter.prototype = {
 		constructor: Filter, 
-		set_dept_val:function(d){
-			this.dept_val = d;
-		}, 
-		set_program_val:function(p){
-			this.program_val.push(p);
-		}, 
-		set_location_val:function(l){
-			this.location_val.push(l);
-		}, 
+		// displays the filters and handles onclick events
 		display_filters:function(){
 			var div = document.getElementById('filter_div');
+			var filter = new Filter(this.format_val);
+			filter.dept_val = this.dept_val;
+			filter.program_val = this.program_val;
+			filter.location_val = this.location_val;
 			div.style.visibility = 'visible';
 			
-			var tempArray = [];
-			var html = '';
-			var filter = new Filter('');
-			
-			if (this.dept_val !== '') html += "<div onclick='delete_filter(this.id)' id='" + this.dept_val.replace(/ /g, '').replace(/[^\w\s]/g, '') + "' class='filter'>" + this.dept_val + "</div>";
-			html += "<div id='" + this.format_val + "' class='filter'>" + this.format_val + "</div>";
-			if (this.program_val.length !== 0) {
+			// department filter
+			if (this.dept_val !== ''){
+				var filter_dept = document.getElementById('filter_dept');
+				filter_dept.innerHTML = this.dept_val;
+				filter_dept.style.display = 'inline-block';
+				
+				$('#filter_dept').click(function(){
+					filter.dept_val = '';
+					filter.filter_values();
+					filter_dept.style.display = 'none';
+				});
+			}
+			// format filter
+			if (this.format_val === "Online"){
+				var filter_format = document.getElementById('filter_format');
+				filter_format.innerHTML = this.format_val;
+				filter_format.style.display = 'inline-block';
+				
+				$('#filter_format').click(function(){
+					filter.format_val = 'Traditional';
+					filter.filter_values();
+					filter_format.style.display = 'none';
+				});
+			}
+			// program levels filters
+			if (this.program_val.length !== 0){
+				var filter_program = document.getElementById('filter_program');
+				var tempArray = [];
+				var html = '';
+				
+				filter_program.style.display = 'inline_block';
 				tempArray = this.program_val.toString().split(',');
+				
 				for (var i = 0; i < tempArray.length; i++){
-					html += "<div id='" + tempArray[i].replace(/[^\w\s]/g, '') + "' class='filter'>" + tempArray[i] + "</div>";
+					var divID = tempArray[i];
+					if (tempArray[i] === "Master's") divID = 'Masters';
+					html += "<div id='filter_" + divID + "' class='filter'>" + tempArray[i] + '</div>';
+				}
+				filter_program.innerHTML = html;
+				for (var j = 0; j < tempArray.length; j++){
+					$('#filter_' + tempArray[j].replace(/[^\w\s]/g, '')).click(function(){
+						var temp = this.id.slice(7);
+						var index = tempArray.indexOf(temp);
+						var program_val = tempArray;
+						program_val.splice(index, 1);
+						filter.program_val = program_val;
+						filter.filter_values();
+						
+						document.getElementById(this.id).style.display = 'none';
+					});
 				}
 			}
-			if (this.location_val.length !== 0) {
+			// location filters
+			if (this.location_val.length !== 0){
+				var filter_location = document.getElementById('filter_location');
+				var tempArray = [];
+				var html = '';
+				
+				filter_location.style.display = 'inline_block';
 				tempArray = this.location_val.toString().split(',');
 				for (var i = 0; i < tempArray.length; i++){
-					html += "<div id='" + tempArray[i].replace(/ /g, '') + "' class='filter'>" + tempArray[i] + "</div>";
+					html += "<div id='filter_" + tempArray[i].replace(/ /g, '') + "' class='filter'>" + tempArray[i] + '</div>';
+				}
+				filter_location.innerHTML = html;
+				for (var j = 0; j < tempArray.length; j++){
+					$('#filter_' + tempArray[j].replace(/ /g, '')).click(function(){
+						var temp = this.id.slice(7);
+						var index = tempArray.indexOf(temp);
+						var location_val = tempArray;
+						location_val.splice(index, 1);
+						filter.location_val = location_val;
+						filter.filter_values();
+						
+						document.getElementById(this.id).style.display = 'none';
+					});
 				}
 			}
-			
-			div.innerHTML = html;
 		}, 
-
 		filter_values:function(){
 			var check = false; var check_program = false; var check_location = false;
 			var tempArray = []; var tempArray2 = [];
@@ -193,15 +246,12 @@ window.onload = function(){
 				}
 				
 				if (check == true) matches.push(degrees[i]);
-				else if (check == false) nonmatches.push(degrees[i].name.replace(/ /g, ''));
+				else nonmatches.push(degrees[i].name.replace(/ /g, ''));
 			}
-			
-			alert(matches);
 			
 			var _degrees = new Degree("", "", "", [], []);
 			_degrees.hide_degrees(nonmatches);
 			_degrees.display_degrees(matches);
-		}, 
-		testing:function(){
-			alert(this.keyword_val + this.dept_val + this.format_val); }
+			
+		},
 	}

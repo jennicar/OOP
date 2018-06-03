@@ -22,11 +22,13 @@ note: should be in js folder
     	constructor: Degree,
 		display_degrees:function(_degrees){
 			for (var i = 0; i < _degrees.length; i++){
+				// if you don't want the fade in effect, you can change it to show()
 				$("#" + _degrees[i].name.replace(/ /g, '')).fadeIn();
 			}
 		}, 
 		hide_degrees:function(_degrees){
 			for (var i = 0; i < _degrees.length; i++){
+				// if you don't want the fade out effect, you can change it to hide()
 				$("#" + _degrees[i].replace(/ /g, '')).fadeOut();
 			}
 		}

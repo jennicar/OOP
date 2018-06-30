@@ -24,9 +24,9 @@ window.onload = function(){
         var program_val = $('#program_val').val();
         var location_val = $('#location_val').val();
         var keywords_val = $('#keywords_val').val().trim();
-						 
-        if (online_toggle_check == false) var filter = new Filter('Traditional');
-        else if (online_toggle_check == true) var filter = new Filter('Online');
+		var formal_val = document.getElementById('format_val');
+        if (formal_val.checked == false) var filter = new Filter('Traditional');
+        else var filter = new Filter('Online');
         if (dept_val !== 'Department') filter.dept_val = dept_val;       
         if (program_val !== null) filter.program_val = program_val;
         if (location_val !== null) filter.location_val = location_val;
@@ -286,9 +286,9 @@ window.onload = function(){
 				// keyword
 				if (this.keywords_val !== ''){
 					var regex = new RegExp(this.keywords_val, "gi");
-					if (degrees[i].keywords.match(regex)) check_keyword = true;
+					if (degrees[i].keywords.replace(/ /g, '').match(regex)) check_keyword = true;
 					else check_keyword = false;
-				}				
+				}
 				if ((check === true) && (check_keyword === true)) matches.push(degrees[i]);
 				else nonmatches.push(degrees[i].name.replace(/ /g, ''));
 			}			

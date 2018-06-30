@@ -38,7 +38,7 @@ note: should be in js folder
 	function load_degrees(){
 		// when adding degrees, make sure the degree name here matches the div id on the html page, avoid using symbols, did not account for it
 		var accounting = new Degree("Accounting", "Business", "Online", ["Bachelor", "Master's"], ["Main Campus"]);
-		accounting.keywords = "accounting public accounting general accounting master of business administration 3+2, 3+2 program";
+		accounting.keywords = "accounting public accounting general accounting master of business administration 3+2 program";
 		var addiction_studies = new Degree("Addiction Studies", "Social and Behavioral Sciences", "Traditional", ["Minor"], ["Main Campus"]);
 		addiction_studies.keywords = "addiction studies addiction counselor human services"
 		var agriculture_science = new Degree("Agriculture Science", "WCCC", "Online", ["Associate", "Master's"], ["Bishop Campus"]);

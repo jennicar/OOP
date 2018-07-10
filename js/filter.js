@@ -32,17 +32,12 @@ window.onload = function(){
         if (location_val !== null) filter.location_val = location_val;
 		if (keywords_val !== ''){
 			filter.keyword_display = keywords_val;
-			filter.keywords_val = keywords_val.replace(/ /g, '');
+			temp_keywords_val = keywords_val.replace(/ /g, '');
+			filter.keywords_val = temp_keywords_val.replace('+', '%2B');
 		}
                  		 
         filter.filter_values();
         filter.display_filters();
-	}
-	// toggles online_only button
-	var online_btn = document.getElementById('format_btn');
-	online_btn.onclick = function(){
-		if (online_toggle_check == false) online_toggle_check = true;
-		else online_toggle_check = false;
 	}
 	
 	// not my code, found here --> http://jsfiddle.net/xQqbR/1022/
@@ -286,14 +281,14 @@ window.onload = function(){
 				// keyword
 				if (this.keywords_val !== ''){
 					var regex = new RegExp(this.keywords_val, "gi");
-					if (degrees[i].keywords.replace(/ /g, '').match(regex)) check_keyword = true;
+					if (degrees[i].keywords.replace(/ /g, '').replace('+', '%2B').match(regex)) check_keyword = true;
 					else check_keyword = false;
 				}
 				if ((check === true) && (check_keyword === true)) matches.push(degrees[i]);
 				else nonmatches.push(degrees[i].name.replace(/ /g, ''));
-			}			
+			}
 			var _degrees = new Degree("", "", "", [], []);
-			_degrees.hide_degrees(nonmatches);
-			_degrees.display_degrees(matches);	
+				_degrees.hide_degrees(nonmatches);
+				_degrees.display_degrees(matches);
 		}
 	}

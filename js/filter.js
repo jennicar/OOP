@@ -85,7 +85,11 @@ window.onload = function(){
 				var filter_keywords = document.getElementById('filter_keywords');
 				filter_keywords.innerHTML = "Search results for " + this.keyword_display;
 				filter_keywords.style.display = "block";
-			}			
+			}
+			else {
+				var filter_keywords = document.getElementById('filter_keywords');
+				filter_keywords.style.display = "none";
+			}
 			// department
 			if (this.dept_val !== ''){
 				var filter_dept = document.getElementById('filter_dept');

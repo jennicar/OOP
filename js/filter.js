@@ -2,20 +2,25 @@
 SEARCH FILTER FUNCTIONS
 
 Coded by Jennica Ramones
-Affiliated with Colorado Mesa University
-Last updated: June 2018
+Colorado Mesa University
+Last updated: July 2018
 
 note: should be in js folder
 */
 
 var degrees = [];
 var online_toggle_check = false;
+var tempArrayNonMatches = [];
 
 window.onload = function(){
+	var alphabet_toggle = document.getElementById('sorting_toggles');
 	load_degrees();
 	$('#search_tool').submit(function(){
 		initiate_search();
 		return false;
+	});
+	$('.sort_categories').click(function(){
+		show_degrees(this.id);
 	});
 	
 	// initiates search when search button is clicked
@@ -37,13 +42,31 @@ window.onload = function(){
 		}
                  		 
         filter.filter_values();
+		var form = document.getElementById('search_tool').reset();
         filter.display_filters();
+	}
+
+	function show_degrees(id){
+		var _degrees = new Degree("", "", "", [], []);
+		var alphabet = id.split('');
+		var tempDegrees;
+		var matches = [];
+		var nonmatches = [];
+		for(var j = 0; j < degrees.length; j++){
+			tempDegrees = degrees[j].name.toLowerCase().split('');
+			for (var i = 0; i < id.length; i++){
+				if (tempDegrees[0] === id[i]) matches.push(degrees[j]);
+				else nonmatches.push(degrees[j].name.replace(/ /g, ''));
+			}
+		}
+		_degrees.hide_degrees(nonmatches);
+		_degrees.display_degrees(matches);
 	}
 	
 	// not my code, found here --> http://jsfiddle.net/xQqbR/1022/
 	// modified code for program
 	// prevents the need to hold down the CTRL button when selecting options
-	$('#program_val > option, location_val > option').mousedown(function(e) {
+	$('#program_val > option, #location_val > option').mousedown(function(e) {
 		e.preventDefault();
 		var originalScrollTop = $(this).parent().scrollTop();
 		console.log(originalScrollTop);
@@ -292,7 +315,7 @@ window.onload = function(){
 				else nonmatches.push(degrees[i].name.replace(/ /g, ''));
 			}
 			var _degrees = new Degree("", "", "", [], []);
-				_degrees.hide_degrees(nonmatches);
-				_degrees.display_degrees(matches);
+			_degrees.hide_degrees(nonmatches);
+			_degrees.display_degrees(matches);
 		}
 	}

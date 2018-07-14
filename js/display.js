@@ -2,8 +2,8 @@
 DISPLAY/DATA FUNCTIONS
 
 Coded by Jennica Ramones
-Affiliated with Colorado Mesa University
-Last updated: June 2018
+Colorado Mesa University
+Last updated: July 2018
 
 note: should be in js folder
 */
@@ -21,6 +21,9 @@ note: should be in js folder
     Degree.prototype = {
     	constructor: Degree,
 		display_degrees:function(_degrees){
+			/*var alpha_div = document.getElementById('alpha_toggles');
+			if (_degrees.length >= 12) $('#alpha_toggles').fadeIn();
+			else $('#alpha_toggles').fadeOut();*/
 			for (var i = 0; i < _degrees.length; i++){
 				// if you don't want the fade in effect, you can change it to show()
 				$("#" + _degrees[i].name.replace(/ /g, '')).fadeIn();
@@ -43,9 +46,8 @@ note: should be in js folder
 		addiction_studies.keywords = "addiction studies addiction counselor human services"
 		var agriculture_science = new Degree("Agriculture Science", "WCCC", "Online", ["Associate", "Master's"], ["Bishop Campus"]);
 		agriculture_science.keywords = "agriculture science ag science ag sustainable agriculture horticultural livestock";
-		
+
 		degrees.push(accounting); degrees.push(addiction_studies); degrees.push(agriculture_science);
-		
 		var _degrees = new Degree("", "", "", [], []);
 		degrees.sort(compare);
 		_degrees.display_degrees(degrees);

@@ -19,9 +19,7 @@ window.onload = function(){
 		initiate_search();
 		return false;
 	});
-	$('.sort_categories').click(function(){
-		show_degrees(this.id);
-	});
+	$('.sort_categories').click(function(){ show_degrees(this.id);	});
 	
 	// initiates search when search button is clicked
 	function initiate_search(){

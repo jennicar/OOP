@@ -22,7 +22,7 @@ note: should be in js folder
     	constructor: Degree,
 		display_degrees:function(_degrees){
 			/*var alpha_div = document.getElementById('alpha_toggles');
-			if (_degrees.length >= 12) $('#alpha_toggles').fadeIn();
+			if (_degrees.length > 12) $('#alpha_toggles').fadeIn();
 			else $('#alpha_toggles').fadeOut();*/
 			for (var i = 0; i < _degrees.length; i++){
 				// if you don't want the fade in effect, you can change it to show()

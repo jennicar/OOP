@@ -15,7 +15,7 @@
 	display: inline-block;
 }
 
-#filter_dept, #filter_format, #filter_program, #filter_location, #filter_keywords{
+#filter_dept, #filter_format, #filter_program, #filter_location{
 	display: none;
 }
 

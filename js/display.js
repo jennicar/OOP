@@ -9,10 +9,9 @@ note: should be in js folder
 */
 
 // degree information
-	function Degree(n, d, f, p, l){
+	function Degree(n, d, p, l){
 		this.name = n;
 		this.dept = d;
-		this.format = f;
 		this.program = p;
 		this.location = l;
 		this.keywords = '';
@@ -21,9 +20,6 @@ note: should be in js folder
     Degree.prototype = {
     	constructor: Degree,
 		display_degrees:function(_degrees){
-			/*var alpha_div = document.getElementById('alpha_toggles');
-			if (_degrees.length > 12) $('#alpha_toggles').fadeIn();
-			else $('#alpha_toggles').fadeOut();*/
 			for (var i = 0; i < _degrees.length; i++){
 				// if you don't want the fade in effect, you can change it to show()
 				$("#" + _degrees[i].name.replace(/ /g, '')).fadeIn();
@@ -40,15 +36,15 @@ note: should be in js folder
 	// loading and displaying degrees
 	function load_degrees(){
 		// when adding degrees, make sure the degree name here matches the div id on the html page, avoid using symbols, did not account for it
-		var accounting = new Degree("Accounting", "Business", "Online", ["Bachelor", "Master's"], ["Main Campus"]);
+		var accounting = new Degree("Accounting", "Business", ["Bachelor", "Master's"], ["Main Campus", "Online"]);
 		accounting.keywords = "accounting public accounting general accounting master of business administration 3+2 program";
-		var addiction_studies = new Degree("Addiction Studies", "Social and Behavioral Sciences", "Traditional", ["Minor"], ["Main Campus"]);
+		var addiction_studies = new Degree("Addiction Studies", "Social and Behavioral Sciences", ["Minor"], ["Main Campus", "Traditional"]);
 		addiction_studies.keywords = "addiction studies addiction counselor human services"
-		var agriculture_science = new Degree("Agriculture Science", "WCCC", "Online", ["Associate", "Master's"], ["Bishop Campus"]);
+		var agriculture_science = new Degree("Agriculture Science", "WCCC", ["Associate", "Master's"], ["Bishop Campus", "Online"]);
 		agriculture_science.keywords = "agriculture science ag science ag sustainable agriculture horticultural livestock";
 
 		degrees.push(accounting); degrees.push(addiction_studies); degrees.push(agriculture_science);
-		var _degrees = new Degree("", "", "", [], []);
+		var _degrees = new Degree("", "", [], []);
 		degrees.sort(compare);
 		_degrees.display_degrees(degrees);
 	}

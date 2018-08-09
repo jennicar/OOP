@@ -1,35 +1,36 @@
 /*
 SEARCH FILTER FUNCTIONS
 
-Coded by Jennica Ramones
-Colorado Mesa University
-Last updated: July 2018
+JENNICA RAMONES
+COLORADO MESA UNIVERSITY
+LAST UPDATED ON AUGUST 2018
 
-note: should be in js folder
+*** SHOULD BE IN JS FOLDER ***
 */
 
 var degrees = [];
-var online_toggle_check = false;
-var tempArrayNonMatches = [];
 
-window.onload = function(){
-	var alphabet_toggle = document.getElementById('sorting_toggles');
+window.onload = function(){	
 	load_degrees();
 	$('#search_tool').submit(function(){
 		initiate_search();
 		return false;
 	});
+
 	$('.sort_categories').click(function(){ show_degrees(this.id);	});
 	
-	// initiates search when search button is clicked
+	// INITIATES SEARCH WHEN SUBMIT IS CLICKED
 	function initiate_search(){
+		// hides alphabet toggle on search
+		document.getElementById('alpha_toggles').style.visibility = "hidden";
+
+		// gets user's filter options and filters
         var dept_val = $('#dept_val option:selected').text();
         var program_val = $('#program_val').val();
         var location_val = $('#location_val').val();
         var keywords_val = $('#keywords_val').val().trim();
-		var formal_val = document.getElementById('format_val');
-        if (formal_val.checked == false) var filter = new Filter('Traditional');
-        else var filter = new Filter('Online');
+        var filter = new Filter();
+
         if (dept_val !== 'Department') filter.dept_val = dept_val;       
         if (program_val !== null) filter.program_val = program_val;
         if (location_val !== null) filter.location_val = location_val;
@@ -38,15 +39,17 @@ window.onload = function(){
 			temp_keywords_val = keywords_val.replace(/ /g, '');
 			filter.keywords_val = temp_keywords_val.replace('+', '%2B');
 		}
-                 		 
+
         filter.filter_values();
-		var form = document.getElementById('search_tool').reset();
+        filter.hide_filters();
         filter.display_filters();
+
+        // resets search selections
+		document.getElementById('search_tool').reset();
 	}
 
 	function show_degrees(id){
 		var _degrees = new Degree("", "", "", [], []);
-		var alphabet = id.split('');
 		var tempDegrees;
 		var matches = [];
 		var nonmatches = [];
@@ -80,9 +83,8 @@ window.onload = function(){
 }
 	
 	// filter functions
-	function Filter(f){
+	function Filter(){
 		this.dept_val = '';
-		this.format_val = f;
 		this.program_val = [];
 		this.location_val = [];
 		this.keywords_val = '';
@@ -91,30 +93,41 @@ window.onload = function(){
 	
 	Filter.prototype = {
 		constructor: Filter, 
+		// hides filters
+		hide_filters:function(){
+			//var filter_keywords = document.getElementById('filter_keywords');
+			var filter_dept = document.getElementById('filter_dept');
+			var filter_program = document.getElementById('filter_program');
+			var filter_location = document.getElementById('filter_location');
+			if (filter_dept.style.display === "inline-block") filter_dept.style.display = 'none';
+			if (filter_program.style.display === "inline-block") filter_program.style.display = 'none';
+			if (filter_location.style.display === "inline-block") filter_location.style.display = 'none';
+		}, 
 		// displays the filters and handles onclick events when removing a filter
 		display_filters:function(){
 			var div = document.getElementById('filter_div');
-			var filter = new Filter(this.format_val);
+			var filter = new Filter();
 			filter.dept_val = this.dept_val;
 			filter.program_val = this.program_val;
 			filter.location_val = this.location_val;
 			filter.keywords_val = this.keywords_val;
+			filter.keyword_display = this.keyword_display;
 			div.style.visibility = 'visible';
-			
+
 			// keyword
-			if (this.keywords_val !== ''){
+			if (filter.keywords_val !== ''){
 				var filter_keywords = document.getElementById('filter_keywords');
-				filter_keywords.innerHTML = "Search results for " + this.keyword_display;
-				filter_keywords.style.display = "block";
+				filter_keywords.innerHTML = "Search results for " + filter.keyword_display;
+				filter_keywords.style.visibility = "visible";
 			}
 			else {
 				var filter_keywords = document.getElementById('filter_keywords');
-				filter_keywords.style.display = "none";
+				filter_keywords.style.visibility = "hidden";
 			}
 			// department
-			if (this.dept_val !== ''){
+			if (filter.dept_val !== ''){
 				var filter_dept = document.getElementById('filter_dept');
-				filter_dept.innerHTML = this.dept_val;
+				filter_dept.innerHTML = filter.dept_val;
 				filter_dept.style.display = 'inline-block';				
 				$('#filter_dept').click(function(){
 					filter.dept_val = '';
@@ -122,24 +135,13 @@ window.onload = function(){
 					filter_dept.style.display = 'none';
 				});
 			}
-			// format -- only shows filter if it's online
-			if (this.format_val === "Online"){
-				var filter_format = document.getElementById('filter_format');
-				filter_format.innerHTML = this.format_val;
-				filter_format.style.display = 'inline-block';				
-				$('#filter_format').click(function(){
-					filter.format_val = 'Traditional';
-					filter.filter_values();
-					filter_format.style.display = 'none';
-				});
-			}
 			// program levels
-			if (this.program_val.length !== 0){
+			if (filter.program_val.length !== 0){
 				var filter_program = document.getElementById('filter_program');
 				var tempArray = [];
 				var html = '';				
-				filter_program.style.display = 'inline_block';
-				tempArray = this.program_val.toString().split(',');				
+				filter_program.style.display = 'inline-block';
+				tempArray = filter.program_val.toString().split(',');				
 				for (var i = 0; i < tempArray.length; i++){
 					var divID = tempArray[i];
 					if (tempArray[i] === "Master's") divID = 'Masters';
@@ -159,12 +161,12 @@ window.onload = function(){
 				}
 			}
 			// location
-			if (this.location_val.length !== 0){
+			if (filter.location_val.length !== 0){
 				var filter_location = document.getElementById('filter_location');
 				var tempArray = [];
 				var html = '';				
-				filter_location.style.display = 'inline_block';
-				tempArray = this.location_val.toString().split(',');
+				filter_location.style.display = 'inline-block';
+				tempArray = filter.location_val.toString().split(',');
 				for (var i = 0; i < tempArray.length; i++){
 					html += "<div id='filter_" + tempArray[i].replace(/ /g, '') + "' class='filter'>" + tempArray[i] + '</div>';
 				}
@@ -191,40 +193,24 @@ window.onload = function(){
 			var matches = []; var nonmatches = [];
 			for (var i = 0; i < degrees.length; i++){
 				check = false; check_program = false; check_location = false;
-				// department empty, program level empty, location empty, format traditional
-				if ((this.dept_val === '') && (this.program_val.length === 0) && (this.location_val.length === 0) && (this.format_val === 'Traditional')) check = true;
-				// department empty, program level empty, location empty, format online
-				else if ((this.dept_val === '') && (this.program_val.length === 0) && (this.location_val.length === 0) && (this.format_val === degrees[i].format)) check = true;
-				// department empty, program level empty, location filled, format traditional
-				else if ((this.dept_val === '') && (this.program_val.length === 0) && (this.location_val.length !== 0) && (this.format_val === 'Traditional')){
+				// department empty, program level empty, location empty
+				if ((this.dept_val === '') && (this.program_val.length === 0) && (this.location_val.length === 0)) check = true;
+				// department empty, program level empty, location filled
+				else if ((this.dept_val === '') && (this.program_val.length === 0) && (this.location_val.length !== 0)){
 					tempArray = degrees[i].location;
 					for (var j = 0; j < tempArray.length; j++){
 						if (tempLocation.includes(tempArray[j])) check = true;
 					}
 				}
-				// department empty, program level empty, location filled, format online
-				else if ((this.dept_val === '') && (this.program_val.length === 0) && (this.location_val.length !== 0) && (this.format_val === degrees[i].format)){
-					tempArray = degrees[i].location;
-					for (var j = 0; j < tempArray.length; j++){
-						if (tempLocation.includes(tempArray[j])) check = true;
-					}
-				}
-				// department empty, program level filled, location empty, format traditional
-				else if ((this.dept_val === '') && (this.program_val.length !== 0) && (this.location_val.length === 0) && this.format_val === 'Traditional'){
+				// department empty, program level filled, location empty
+				else if ((this.dept_val === '') && (this.program_val.length !== 0) && (this.location_val.length === 0)){
 					tempArray = degrees[i].program;
 					for (var j = 0; j < tempArray.length; j++){
 						if (tempProgram.includes(tempArray[j])) check = true; 
 					}
 				}
-				// department empty, program level filled, location empty, format online
-				else if ((this.dept_val === '') && (this.program_val.length !== 0) && (this.location_val.length === 0) && this.format_val === degrees[i].format){
-					tempArray = degrees[i].program;
-					for (var j = 0; j < tempArray.length; j++){
-						if (tempProgram.includes(tempArray[j])) check = true; 
-					}
-				}
-				// department empty, program level filled, location filled, format traditional
-				else if ((this.dept_val === '') && (this.program_val.length !== 0) && (this.location_val.length !== 0) && this.format_val === 'Traditional'){
+				// department empty, program level filled, location filled
+				else if ((this.dept_val === '') && (this.program_val.length !== 0) && (this.location_val.length !== 0)){
 					tempArray = degrees[i].program;
 					tempArray2 = degrees[i].location;
 					for (var j = 0; j < tempArray.length; j++){
@@ -235,52 +221,24 @@ window.onload = function(){
 					}
 					if (check_program === true && check_location === true) check = true;
 				}
-				// department empty, program level filled, location filled, format online
-				else if ((this.dept_val === '') && (this.program_val.length !== 0) && (this.location_val.length !== 0) && this.format_val === degrees[i].format){
-					tempArray = degrees[i].program;
-					tempArray2 = degrees[i].location;
-					for (var j = 0; j < tempArray.length; j++){
-						if (tempProgram.includes(tempArray[j])) check_program = true;
-					}
-					for (var k = 0; k < tempArray2.length; k++){
-						if (tempLocation.includes(tempArray2[k])) check_location = true;
-					}
-					if (check_program === true && check_location === true) check = true;
-				}
-				// department filled, program level empty, location empty, format traditional
-				else if ((this.dept_val === degrees[i].dept) && (this.program_val.length === 0) && (this.location_val.length === 0) && this.format_val === 'Traditional') check = true;
-				// department filled, program level empty, location empty, format online
-				else if ((this.dept_val === degrees[i].dept) && (this.program_val.length === 0) && (this.location_val.length === 0) && this.format_val === degrees[i].format) check = true;
-				// department filled, program level empty, location filled, format traditional
-				else if ((this.dept_val === degrees[i].dept) && (this.program_val.length === 0) && (this.location_val.length !== 0) && (this.format_val === 'Traditional')) {
+				// department filled, program level empty, location empty
+				else if ((this.dept_val === degrees[i].dept) && (this.program_val.length === 0) && (this.location_val.length === 0)) check = true;
+				// department filled, program level empty, location filled
+				else if ((this.dept_val === degrees[i].dept) && (this.program_val.length === 0) && (this.location_val.length !== 0)) {
 					tempArray = degrees[i].location;
 					for (var j = 0; j < tempArray.length; j++){
 						if (tempLocation.includes(tempArray[j])) check = true;
 					}
 				}
-				// department filled, program level empty, location filled, format online
-				else if ((this.dept_val === degrees[i].dept) && (this.program_val.length === 0) && (this.location_val.length !== 0) && (this.format_val === degrees[i].format)) {
-					tempArray = degrees[i].location;
-					for (var j = 0; j < tempArray.length; j++){
-						if (tempLocation.includes(tempArray[j])) check = true;
-					}
-				}
-				// department filled, program level filled, location empty, format traditional
-				else if ((this.dept_val === degrees[i].dept) && (this.program_val.length !== 0) && (this.location_val.length === 0) && (this.format_val === 'Traditional')) {
+				// department filled, program level filled, location empty
+				else if ((this.dept_val === degrees[i].dept) && (this.program_val.length !== 0) && (this.location_val.length === 0)) {
 					tempArray = degrees[i].program;
 					for (var j = 0; j < tempArray.length; j++){
 						if (tempProgram.includes(tempArray[j])) check = true;
 					}
 				}
-				// department filled, program level filled, location empty, format online
-				else if ((this.dept_val === degrees[i].dept) && (this.program_val.length !== 0) && (this.location_val.length === 0) && (this.format_val === degrees[i].format)) {
-					tempArray = degrees[i].program;
-					for (var j = 0; j < tempArray.length; j++){
-						if (tempProgram.includes(tempArray[j])) check = true;
-					}
-				}
-				// department filled, program level filled, location filled, format traditional
-				else if ((this.dept_val === degrees[i].dept) && (this.program_val.length !== 0) && (this.location_val.length !== 0) && (this.format_val === 'Traditional')) {
+				// department filled, program level filled, location filled
+				else if ((this.dept_val === degrees[i].dept) && (this.program_val.length !== 0) && (this.location_val.length !== 0)) {
 					tempArray = degrees[i].program;
 					tempArray2 = degrees[i].location;
 					for (var j = 0; j < tempArray.length; j++){
@@ -290,19 +248,7 @@ window.onload = function(){
 						if (tempLocation.includes(tempArray2[k])) check_location = true;
 					}
 					if (check_program === true && check_location === true) check = true;
-				}
-				// department filled, program level filled, location filled, format online
-				else if ((this.dept_val === degrees[i].dept) && (this.program_val.length !== 0) && (this.location_val.length !== 0) && (this.format_val === degrees[i].format)) {
-					tempArray = degrees[i].program;
-					tempArray2 = degrees[i].location;
-					for (var j = 0; j < tempArray.length; j++){
-						if (tempProgram.includes(tempArray[j])) check_program = true;
-					}
-					for (var k = 0; k < tempArray2.length; k++){
-						if (tempLocation.includes(tempArray2[k])) check_location = true;
-					}
-					if (check_program === true && check_location === true) check = true;
-				}				
+				}	
 				// keyword
 				if (this.keywords_val !== ''){
 					var regex = new RegExp(this.keywords_val, "gi");
@@ -315,5 +261,7 @@ window.onload = function(){
 			var _degrees = new Degree("", "", "", [], []);
 			_degrees.hide_degrees(nonmatches);
 			_degrees.display_degrees(matches);
+
+			if (nonmatches.length === 0) document.getElementById('alpha_toggles').style.visibility = 'visible';
 		}
 	}
